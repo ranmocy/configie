@@ -5,8 +5,8 @@ require File.expand_path('../lib/configie/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.name          = "configie"
   gem.version       = Configie::VERSION
-  gem.summary       = %q{TODO: Summary}
-  gem.description   = %q{TODO: Description}
+  gem.summary       = %q{Configie can help you config your application in one place with the power of blocks.}
+  gem.description   = %q{Configie allows you to create your config variable for your application with blocks. With the help of Ruby blocks, you can define your configs easier than ever before.}
   gem.license       = "MIT"
   gem.authors       = ["Ranmocy Sheng"]
   gem.email         = "ranmocy@gmail.com"
