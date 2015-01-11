@@ -1,3 +1,6 @@
+# A sample Guardfile
+# More info at https://github.com/guard/guard#readme
+
 ## Uncomment and set this to only include directories you want to watch
 # directories %w(app lib config test spec feature)
 
@@ -37,5 +40,6 @@ guard :rspec, cmd: "bundle exec rspec" do
   rspec = dsl.rspec
   watch(rspec.spec_helper) { rspec.spec_dir }
   watch(rspec.spec_support) { rspec.spec_dir }
-  watch(rspec.spec_files) { rspec.spec_dir }
+  watch(rspec.spec_files)
+  watch(%r{^lib/(.+)\.rb$}) { |m| rspec.spec.(m[1]) }
 end
