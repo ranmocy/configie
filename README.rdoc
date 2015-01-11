@@ -1,0 +1,27 @@
+= configie
+
+* {Homepage}[https://rubygems.org/gems/configie]
+* {Documentation}[http://rubydoc.info/gems/configie/frames]
+* {Email}[mailto:ranmocy at gmail.com]
+
+== Description
+
+TODO: Description
+
+== Features
+
+== Examples
+
+  require 'configie'
+
+== Requirements
+
+== Install
+
+  $ gem install configie
+
+== Copyright
+
+Copyright (c) 2015 Ranmocy Sheng
+
+See LICENSE.txt for details.
