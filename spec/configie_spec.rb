@@ -110,27 +110,41 @@ describe Configie do
     expect(config.other).to be_nil
   end
 
-  context 'about merge' do
-    before do
-      subject do
+  context 'when merge' do
+    let(:config) do
+      subject.new do
         merged :unmerged
       end
     end
 
     it 'allows user to merge more properties' do
-      dup = subject.merge do
+      dup = config.merge do
         merged :merged_thing
       end
-      subject.merged.should equal :unmerged
-      dup.merged.should equal :merged_thing
+      expect(config.merged).to equal :unmerged
+      expect(dup.merged).to equal :merged_thing
+    end
+
+    it 'allows user to deep copy' do
+      a = "merged_thing"
+      config = subject.new do
+        merged a
+      end
+      dup = config.merge do
+        merged2 :second
+      end
+      expect(config.merged).to equal a
+      expect(dup.merged).to eq a
+      expect(dup.merged).not_to equal a
+      expect(dup.merged2).to eq :second
     end
 
     it 'allows user to merge more properties to itself' do
-      dup = subject.merge! do
+      dup = config.merge! do
         merged :merged_thing2
       end
-      subject.merged.should equal :merged_thing2
-      subject.should equal dup
+      expect(config.merged).to equal :merged_thing2
+      expect(config).to equal dup
     end
   end
 

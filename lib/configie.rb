@@ -6,8 +6,22 @@ class Configie
     merge!(&block)
   end
 
+  def dup
+    instance = self.class.new
+    config = instance.instance_variable_get(:@config)
+    @config.each_pair do |key, val|
+      p [key, val, val.respond_to?(:dup)]
+      begin
+        config[key] = val.dup
+        p "dup"
+      rescue Exception => e
+        config[key] = val
+      end
+    end
+    instance
+  end
+
   def merge(&block)
-    abort 'FIXME: merge is not fully implemented, it should be deep copied.'
     self.dup.merge!(&block)
   end
 
