@@ -10,13 +10,7 @@ class Configie
     instance = self.class.new
     config = instance.instance_variable_get(:@config)
     @config.each_pair do |key, val|
-      p [key, val, val.respond_to?(:dup)]
-      begin
-        config[key] = val.dup
-        p "dup"
-      rescue Exception => e
-        config[key] = val
-      end
+      config[key] = val.dup rescue config[key] = val
     end
     instance
   end
