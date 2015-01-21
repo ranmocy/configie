@@ -14,6 +14,59 @@ TODO: Description
 
   require 'configie'
 
+  # accepts a block to define properties
+  config = Configie.new do
+    a_property :value
+    another_property :value2
+  end
+  config.a_property # => :value
+  config.another_property # => :value2
+
+  # accepts closure
+  outter_var_val = :outter_var
+  def outter_func_val(params)
+    "outter_func_#{params.to_s}"
+  end
+  config = Configie.new do
+    outter_var_key outter_var_val
+    outter_func_key outter_func_val("foo")
+  end
+  config.outter_var_key # => :outter_var
+  config.outter_func_key # => "outter_func_foo"
+
+  # accepts deep properties
+  config = Configie.new do
+    deep_hash do
+      item_a :something
+      item_b :something_else
+    end
+  end
+  config.deep_hash.item_a # => :something
+  config.deep_hash.item_b # => :something_else
+
+  # can reuse right after defination
+  config = Configie.new do
+    flag :test_flag
+
+    if flag == :test_flag
+      something :something
+    else
+      other :other
+    end
+  end
+  config.something # => :something
+  config.other # => nil
+
+  # and merge more
+  config = Configie.new do
+    merged :unmerged
+  end
+  config.merge! do
+    merged2 :merged
+  end
+  config.merged # => :unmerged
+  config.merged2 # => :merged
+
 == Requirements
 
 == Install
